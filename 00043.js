@@ -25,21 +25,52 @@
 // Data yang diharapkan merupakan akumulasi student yang lulus dan tidak dari setiap kelas.
 // Standard kelulusan adalah minimum 70.
 
-
 function getReport(studentGrades) {
   // only code here..
+  const report = [];
+
+  const studentsByClass = {};
+  for (let i = 0; i < studentGrades.length; i++) {
+    const classCode = studentGrades[i].classCode;
+    if (!studentsByClass[classCode]) {
+      studentsByClass[classCode] = [];
+    }
+    studentsByClass[classCode].push(studentGrades[i]);
+  }
+
+  for (let classCode in studentsByClass) {
+    const studentsInClass = studentsByClass[classCode];
+    const passedStudents = [];
+    const failedStudents = [];
+
+    for (let i = 0; i < studentsInClass.length; i++) {
+      const student = studentsInClass[i];
+      if (student.score >= 70) {
+        passedStudents.push(student.name);
+      } else {
+        failedStudents.push(student.name);
+      }
+    }
+
+    report.push({
+      classCode: classCode,
+      passed: passedStudents,
+      failed: failedStudents,
+    });
+  }
+
+  return report;
 }
 
-
 var grades1 = [
-  { name: 'John', score: 80, classCode: 'A' },
-  { name: 'Mike', score: 60, classCode: 'B' },
-  { name: 'Budi', score: 70, classCode: 'C' },
-  { name: 'Siti', score: 50, classCode: 'A' },
-  { name: 'Aaron', score: 10, classCode: 'A' },
-  { name: 'Arthur', score: 10, classCode: 'C' },
-  { name: 'Osass', score: 10, classCode: 'B' },
-  { name: 'Yolo', score: 90, classCode: 'C' },
+  { name: "John", score: 80, classCode: "A" },
+  { name: "Mike", score: 60, classCode: "B" },
+  { name: "Budi", score: 70, classCode: "C" },
+  { name: "Siti", score: 50, classCode: "A" },
+  { name: "Aaron", score: 10, classCode: "A" },
+  { name: "Arthur", score: 10, classCode: "C" },
+  { name: "Osass", score: 10, classCode: "B" },
+  { name: "Yolo", score: 90, classCode: "C" },
 ];
 
 console.log(getReport(grades1));

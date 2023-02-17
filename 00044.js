@@ -9,27 +9,18 @@
 //   Contoh hasil output bisa dilihat pada test case/driver code
 
 function drawTrack(players, lengthOfTrack) {
-  let track = "";
+  let result = new Array(lengthOfTrack).fill("");
 
   for (let i = 0; i < players.length; i++) {
-    let playerInfo = players[i];
-    let playerName = playerInfo[0];
-    let playerPosition = playerInfo[1];
-
-    // Tambahkan nama player ke dalam track
-    track += playerName + ": ";
-
-    for (let j = 1; j <= lengthOfTrack; j++) {
-      if (j === playerPosition) {
-        track += "P";
-      } else {
-        track += "-";
-      }
-    }
-    track += "\n";
+    let [playerName, playerPosition] = players[i];
+    result[playerPosition - 1] = playerName;
   }
 
-  return track;
+  if (result.some((el) => el === "")) {
+    return result;
+  } else {
+    return [result];
+  }
 }
 
 console.log(

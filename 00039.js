@@ -24,7 +24,7 @@
 //   - WAJIB MENYERTAKAN ALGORITMA/PSEUDOCODE, jika tidak ada maka dianggap tidak mengerjakan
 //   - DILARANG MENGGUNAKAN BUILT IN FUNCTION .indexOf / .includes!
 
-//   PSEUDOCODE 
+//   PSEUDOCODE
 
 //   STORE "kamus" with the value of "abcdefghijklmnopqrstuvwxyz"
 //   STORE "H8BI" with the value of "!@#$%^&*()-+1234567890[]{}"
@@ -32,12 +32,21 @@
 //   FOR LOOP index 0 till length of input
 
 function encrypt(input) {
-
+  const h8bi_dict = { a: "4", e: "3", g: "6", i: "1", o: "0", s: "5", t: "7", b: "8" };
+  let encrypted = "";
+  for (let i = 0; i < input.length; i++) {
+    const char = input[i];
+    if (char.toLowerCase() in h8bi_dict) {
+      encrypted += h8bi_dict[char.toLowerCase()];
+    } else {
+      encrypted += char;
+    }
+  }
+  return encrypted;
 }
 
-console.log(encrypt('dimitri')) // $(1(86(
-console.log(encrypt('irsyah mardiah')) //(67{!* 1!6$(!*
-console.log(encrypt('dimitr€€')) // $(1(86€€
-console.log(encrypt('d!mas')) // $!1!7
-console.log(encrypt('@wtian')) // @[8(!2
-  
+console.log(encrypt("dimitri")); // $(1(86(
+console.log(encrypt("irsyah mardiah")); //(67{!* 1!6$(!*
+console.log(encrypt("dimitr€€")); // $(1(86€€
+console.log(encrypt("d!mas")); // $!1!7
+console.log(encrypt("@wtian")); // @[8(!2
